@@ -6,6 +6,7 @@ class NotebooksController < ApplicationController
     @notebooks = Notebook.all
 
     render json: @notebooks
+    #, methods: :birthdate_br
     # .map { |notebook| notebook.attributes.merge( { author: "Raimundo" }) }
     # except: [:name, :email]
     # only: [:name, :email]
@@ -15,6 +16,7 @@ class NotebooksController < ApplicationController
   # GET /notebooks/1
   def show
     render json: @notebook
+    #.to_br
     # .attributes.merge( { author: "Raimundo" })
   end
 

@@ -14,9 +14,9 @@ namespace :dev do
     puts 'Register Kinds with Contacts Success!'
     
     ############################################
-    
+
     puts 'Register Contacts'
-    
+
     100.times do |i|
       Notebook.create!(
         name: Faker::Name.name,
@@ -25,8 +25,22 @@ namespace :dev do
         kind: Kind.all.sample
       )
     end
-    
+
     puts 'Register Contacts with Success!'
+
+    ############################################
+
+    puts 'Register Phones'
+
+    Notebook.all.each do |notebook|
+      Random.rand(5).times do |i|
+        phone = Phone.create!(number:Faker::PhoneNumber.cell_phone)
+        notebook.phones << phone
+        notebook.save!
+      end
+    end
+
+    puts 'Register Phones with Success!'
+
   end
-  
 end
