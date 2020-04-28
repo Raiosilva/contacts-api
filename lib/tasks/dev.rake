@@ -1,8 +1,12 @@
 namespace :dev do
   desc "Config enviroment developer"
   task setup: :environment do
+
+    puts 'Reset DB...'
+    %(rails db:drop db:create db:migrate)
+
     puts 'Register Kind Contacts'
-    
+
     kinds = %w(Amigo Comercial Conhecido)
     
     kinds.each do |kind|
@@ -41,6 +45,20 @@ namespace :dev do
     end
 
     puts 'Register Phones with Success!'
+
+    ############################################
+
+    puts 'Register Address'
+
+    Notebook.all.each do |notebook|
+      Address.create(
+        street: Faker::Address.street_address,
+        city: Faker::Address.city,
+        notebook: notebook
+      )
+    end
+
+    puts 'Register Address with Success!'
 
   end
 end

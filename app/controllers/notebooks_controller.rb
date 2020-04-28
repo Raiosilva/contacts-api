@@ -15,7 +15,7 @@ class NotebooksController < ApplicationController
 
   # GET /notebooks/1
   def show
-    render json: @notebook
+    render json: @notebook, include: [:kind, :phones, :address]
     #.to_br
     # .attributes.merge( { author: "Raimundo" })
   end
@@ -25,7 +25,7 @@ class NotebooksController < ApplicationController
     @notebook = Notebook.new(notebook_params)
 
     if @notebook.save
-      render json: @notebook, status: :created, location: @notebook
+      render json: @notebook, include: [:kind, :phones, :address], status: :created, location: @notebook
     else
       render json: @notebook.errors, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class NotebooksController < ApplicationController
   # PATCH/PUT /notebooks/1
   def update
     if @notebook.update(notebook_params)
-      render json: @notebook
+      render json: @notebook, include: [:kind, :phones, :address]
     else
       render json: @notebook.errors, status: :unprocessable_entity
     end
@@ -53,6 +53,10 @@ class NotebooksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def notebook_params
-      params.require(:notebook).permit(:name, :email, :birthdate, :kind_id)
+      params.require(:notebook).permit(
+        :name, :email, :birthdate, :kind_id,
+        phones_attributes: [:id, :number, :_destroy],
+        address_attributes: [:id, :street, :city]
+      )
     end
 end
