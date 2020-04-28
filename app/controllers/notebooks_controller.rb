@@ -6,11 +6,16 @@ class NotebooksController < ApplicationController
     @notebooks = Notebook.all
 
     render json: @notebooks
+    # .map { |notebook| notebook.attributes.merge( { author: "Raimundo" }) }
+    # except: [:name, :email]
+    # only: [:name, :email]
+    # root: true
   end
 
   # GET /notebooks/1
   def show
     render json: @notebook
+    # .attributes.merge( { author: "Raimundo" })
   end
 
   # POST /notebooks
@@ -46,6 +51,6 @@ class NotebooksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def notebook_params
-      params.require(:notebook).permit(:name, :email, :birthdate)
+      params.require(:notebook).permit(:name, :email, :birthdate, :kind_id)
     end
 end
