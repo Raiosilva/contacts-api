@@ -55,10 +55,11 @@ class NotebooksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def notebook_params
-      params.require(:notebook).permit(
-        :name, :email, :birthdate, :kind_id,
-        phones_attributes: [:id, :number, :_destroy],
-        address_attributes: [:id, :street, :city]
-      )
+      # params.require(:notebook).permit(
+      #   :name, :email, :birthdate, :kind_id,
+      #   phones_attributes: [:id, :number, :_destroy],
+      #   address_attributes: [:id, :street, :city]
+      # )
+      ActiveModelSerializers::Deserialization.jsonapi_parse(params)
     end
 end

@@ -41,6 +41,11 @@ class KindsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kind
+      if params[:notebook_id]
+        @kind = Notebook.find(params[:notebook_id]).kind
+        return @kind
+      end
+
       @kind = Kind.find(params[:id])
     end
 
