@@ -1,6 +1,10 @@
 class NotebookSerializer < ActiveModel::Serializer
   attributes :id, :name, :email, :birthdate
 
+  belongs_to :kind
+  has_many :phones
+  has_ano :address
+
   def attributes(*args)
     h = super(*args)
     # pt-BR -> h[:birthdate] = (I18n.l(object.birthdate) unless object.birthdate.blank?)
