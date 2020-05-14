@@ -5,6 +5,8 @@ class NotebookSerializer < ActiveModel::Serializer
   has_many :phones
   has_one :address
 
+  link(:self) { notebooks_path(object.id) }
+
   meta do
     { author: 'raimundo Olivera' }
   end
