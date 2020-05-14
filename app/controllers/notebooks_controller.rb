@@ -15,7 +15,9 @@ class NotebooksController < ApplicationController
 
   # GET /notebooks/1
   def show
-    render json: @notebook, include: [:kind, :phones, :address]
+    render json: @notebook, include: [:kind]
+    #, meta: { author: 'Raimundo Oliveira' }
+    #, include: [:kind, :phones, :address]
     #.to_br
     # .attributes.merge( { author: "Raimundo" })
   end
