@@ -1,13 +1,29 @@
 Rails.application.routes.draw do
   resources :kinds
-  resources :notebooks do
-    resource :kind, only: [:show]
-    resource :kind, only: [:show], path: 'relationships/kind'
 
-    resource :phones, only: [:show]
-    resource :phones, only: [:show], path: 'relationships/phones'
+  api_version(:module => 'v1', parameter => {:name => 'version', :value => '1'}) do
+    resources :notebooks do
+      resource :kind, only: [:show]
+      resource :kind, only: [:show], path: 'relationships/kind'
+  
+      resource :phones, only: [:show]
+      resource :phones, only: [:show], path: 'relationships/phones'
+  
+      resource :address, only: [:show, :update, :create, :destroy]
+      resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address'
+    end
+  end
 
-    resource :address, only: [:show, :update, :create, :destroy]
-    resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address'
+  api_version(:module => 'v2', parameter => {:name => 'version', :value => '2'}) do
+    resources :notebooks do
+      resource :kind, only: [:show]
+      resource :kind, only: [:show], path: 'relationships/kind'
+  
+      resource :phones, only: [:show]
+      resource :phones, only: [:show], path: 'relationships/phones'
+  
+      resource :address, only: [:show, :update, :create, :destroy]
+      resource :address, only: [:show, :update, :create, :destroy], path: 'relationships/address'
+    end
   end
 end
