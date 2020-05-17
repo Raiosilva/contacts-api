@@ -1,12 +1,17 @@
 module V1
   class NotebooksController < ApplicationController
     before_action :set_notebook, only: [:show, :update, :destroy]
-  
+
     # GET /notebooks
     def index
-      @notebooks = Notebook.all
+      # page_number = params[:page].try(:[], :number)
+      # per_page = params[:page].try(:[], :size)
+      # @notebooks = Notebook.all.page(page_number).per(per_page)
+      @notebooks = Notebook.all.page(params[:page].try(:[], :number))
+      # @notebooks = Notebook.all.page(params[:page] ? params[:page][:number] : 1)
   
       render json: @notebooks
+      # paginate json: @notebooks
       #, methods: :birthdate_br
       # .map { |notebook| notebook.attributes.merge( { author: "Raimundo" }) }
       # except: [:name, :email]
