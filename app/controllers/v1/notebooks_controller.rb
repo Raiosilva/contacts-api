@@ -1,5 +1,7 @@
 module V1
   class NotebooksController < ApplicationController
+    include ErrorSerializer
+
     before_action :set_notebook, only: [:show, :update, :destroy]
 
     # GET /notebooks
@@ -35,7 +37,8 @@ module V1
       if @notebook.save
         render json: @notebook, include: [:kind, :phones, :address], status: :created, location: @notebook
       else
-        render json: @notebook.errors, status: :unprocessable_entity
+        render json: ErrorSerializer.serializer(@notebook.errors)
+        # render json: @notebook.errors, status: :unprocessable_entity
       end
     end
   
