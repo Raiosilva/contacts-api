@@ -4,8 +4,7 @@ module V1
   
     def destroy
       @notebook.address.destroy
-    end
-    
+    end    
   
     def create
       @notebook.address = Address.new(address_params)
@@ -16,8 +15,7 @@ module V1
         render json: @notebook.errors, status: :unprocessable_entity
       end
     end
-    
-  
+
     def update
       if @notebook.address.update(address_params)
         render json: @notebook.address
@@ -25,8 +23,7 @@ module V1
         render json: @notebook.errors, status: :unprocessable_entity
       end
     end
-    
-  
+
     def show
       render json: @notebook.address
     end

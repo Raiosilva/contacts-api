@@ -5,8 +5,7 @@ module V2
     def destroy
       @notebook.address.destroy
     end
-    
-  
+
     def create
       @notebook.address = Address.new(address_params)
   
@@ -16,8 +15,7 @@ module V2
         render json: @notebook.errors, status: :unprocessable_entity
       end
     end
-    
-  
+
     def update
       if @notebook.address.update(address_params)
         render json: @notebook.address
@@ -25,8 +23,7 @@ module V2
         render json: @notebook.errors, status: :unprocessable_entity
       end
     end
-    
-  
+
     def show
       render json: @notebook.address
     end
@@ -40,7 +37,5 @@ module V2
       def address_params
         ActiveModelSerializers::Deserialization.jsonapi_parse(params)
       end
-  
   end
-
 end

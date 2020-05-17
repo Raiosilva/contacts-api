@@ -5,22 +5,12 @@ module V2
     # GET /notebooks
     def index
       @notebooks = Notebook.last(10)
-  
       render json: @notebooks
-      #, methods: :birthdate_br
-      # .map { |notebook| notebook.attributes.merge( { author: "Raimundo" }) }
-      # except: [:name, :email]
-      # only: [:name, :email]
-      # root: true
     end
   
     # GET /notebooks/1
     def show
       render json: @notebook, include: [:kind, :address, :phones]
-      #, meta: { author: 'Raimundo Oliveira' }
-      #, include: [:kind, :phones, :address]
-      #.to_br
-      # .attributes.merge( { author: "Raimundo" })
     end
   
     # POST /notebooks
@@ -56,11 +46,6 @@ module V2
   
       # Only allow a trusted parameter "white list" through.
       def notebook_params
-        # params.require(:notebook).permit(
-        #   :name, :email, :birthdate, :kind_id,
-        #   phones_attributes: [:id, :number, :_destroy],
-        #   address_attributes: [:id, :street, :city]
-        # )
         ActiveModelSerializers::Deserialization.jsonapi_parse(params)
       end
   end
