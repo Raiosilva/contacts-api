@@ -6,13 +6,16 @@ module V1
 
     # GET /notebooks
     def index
-      # page_number = params[:page].try(:[], :number)
-      # per_page = params[:page].try(:[], :size)
-      # @notebooks = Notebook.all.page(page_number).per(per_page)
-      @notebooks = Notebook.all.page(params[:page].try(:[], :number))
+      page_number = params[:page].try(:[], :number)
+      per_page = params[:page].try(:[], :size)
+      @notebooks = Notebook.all.page(page_number).per(per_page)
+      # @notebooks = Notebook.all.page(params[:page].try(:[], :number))
       # @notebooks = Notebook.all.page(params[:page] ? params[:page][:number] : 1)
-  
-      render json: @notebooks
+
+      if stale?(last_modified: @notebooks)
+        render json: @notebooks
+      end
+      # expires_in 30.seconds, public: true
       # paginate json: @notebooks
       #, methods: :birthdate_br
       # .map { |notebook| notebook.attributes.merge( { author: "Raimundo" }) }
