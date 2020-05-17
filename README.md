@@ -1,3 +1,3 @@
 # README
 
-Desenvolvido afins de estudos.
+Api Rest em Ruby on Rails desenvolvido afins de estudos.
