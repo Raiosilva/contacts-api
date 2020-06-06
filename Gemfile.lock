@@ -61,7 +61,6 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
-    api-pagination (4.8.2)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -180,7 +179,7 @@ GEM
       yard (~> 0.9.20)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
-    websocket-extensions (0.1.4)
+    websocket-extensions (0.1.5)
     yard (0.9.25)
     zeitwerk (2.3.0)
 
@@ -189,7 +188,6 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.2)
-  api-pagination
   bootsnap (>= 1.4.2)
   byebug
   faker
